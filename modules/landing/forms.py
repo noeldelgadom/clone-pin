@@ -20,7 +20,7 @@ class SignupForm(forms.Form):
                 "placeholder":"email"
             }
         ))
-    
+
     password  = forms.CharField(
         max_length=100,
         widget=forms.PasswordInput(
@@ -29,7 +29,7 @@ class SignupForm(forms.Form):
                 "placeholder":"password"
             }
         ))
-    
+
     confirm_password  = forms.CharField(
         max_length=100,
         widget=forms.PasswordInput(
@@ -38,7 +38,7 @@ class SignupForm(forms.Form):
                 "placeholder":"confirm password"
             }
         ))
-        
+
     def clean(self):
         cleaned_data = super(SignupForm, self).clean()
         password = cleaned_data.get("password")
@@ -48,3 +48,20 @@ class SignupForm(forms.Form):
             raise forms.ValidationError(
                 "password and confirm_password does not match"
             )
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100, widget=forms.TextInput(
+        attrs={
+            "class":"form-control",
+            "placeholder":"Username"
+            }
+        ))
+
+    password  = forms.CharField(
+        max_length=100,
+        widget=forms.PasswordInput(
+            attrs={
+                "class":"form-control",
+                "placeholder":"password"
+            }
+        ))
