@@ -47,11 +47,10 @@ def logout(request):
 
 def uploadImage(request):
     if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES, instance=request.user)
+        form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid:
             image = form.save(commit=False)
-            tags = form.cleaned_data['tags'].split(',')
-            image.tags = tags
+            image.usuario = request.user
             image.save()
             return redirect('landing:index')
     else:
