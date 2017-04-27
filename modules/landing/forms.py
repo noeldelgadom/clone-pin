@@ -1,6 +1,30 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Images
 
-
+class ImageUploadForm(ModelForm):
+    tags = forms.CharField(
+        max_length = 100,
+        widget = forms.TextInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Tags',
+            }
+        )
+    )
+    class Meta:
+        model = Images
+        fields = ('descripcion', 'image', 'tags')
+        widget = {
+            'descripcion' : forms.Textarea(
+                attrs={
+                    'rows': 10,
+                    'cols': 15,
+                    'class':'form-control',
+                    'placeholder':'descripcion...'
+                }
+            )
+        }
 
 
 class SignupForm(forms.Form):

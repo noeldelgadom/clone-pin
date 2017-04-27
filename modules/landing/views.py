@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import SignupForm, LoginForm
+from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout as salir, login as iniciar
 from django.http import HttpResponse
@@ -44,3 +44,16 @@ def signup(request):
 def logout(request):
     salir(request)
     return redirect("landing:index")
+
+def uploadImage(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid:
+            image = form.save(commit=False)
+            tags = form.cleaned_data['tags'].split(',')
+            image.tags = tags
+            image.save()
+            return redirect('landing:index')
+    else:
+        form = ImageUploadForm()
+        return render(request, 'landing/form_image.html',{'form': form})
