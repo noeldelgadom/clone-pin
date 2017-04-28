@@ -6,8 +6,9 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-
-    return render(request, 'landing/index.html',{'request':request})
+    images = Images.objects.order_by("-timestamp")
+    return render(request, 'landing/index.html',
+        {'request':request,'images':images})
 
 
 
