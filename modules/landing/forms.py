@@ -21,13 +21,6 @@ class ImageUploadForm(ModelForm):
 
 class SignupForm(forms.Form):
 
-    username = forms.CharField(max_length=100, widget=forms.TextInput(
-        attrs={
-            "class":"form-control",
-            "placeholder":"Username"
-        }
-    ))
-
     email = forms.EmailField(
         max_length=100,
         widget=forms.EmailInput(
@@ -66,10 +59,12 @@ class SignupForm(forms.Form):
             )
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=100, widget=forms.TextInput(
-        attrs={
-            "class":"form-control",
-            "placeholder":"Username"
+    email = forms.EmailField(
+        max_length=100,
+        widget=forms.EmailInput(
+            attrs={
+                "class":"form-control",
+                "placeholder":"email"
             }
         ))
 
